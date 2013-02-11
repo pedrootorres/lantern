@@ -40,7 +40,7 @@ public class Settings {
     
     private boolean systemProxy = true;
     
-    private boolean proxyAllSites = false;
+    private boolean proxyAllSites = true;
     
     private boolean useGoogleOAuth2 = false;
     private String clientID;
