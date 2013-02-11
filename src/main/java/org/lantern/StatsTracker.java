@@ -237,7 +237,7 @@ public class StatsTracker implements Stats {
     @Override
     public void addUpBytesViaProxies(final long bp) {
         upBytesPerSecondViaProxies.addData(bp);
-        log.debug("upBytesPerSecondViaProxies += {} up-rate {}", bp, getUpBytesPerSecond());
+        //log.debug("upBytesPerSecondViaProxies += {} up-rate {}", bp, getUpBytesPerSecond());
     }
 
     /**
@@ -246,7 +246,7 @@ public class StatsTracker implements Stats {
     @Override
     public void addDownBytesViaProxies(final long bp) {
         downBytesPerSecondViaProxies.addData(bp);
-        log.debug("downBytesPerSecondViaProxies += {} down-rate {}", bp, getDownBytesPerSecond());
+        //log.debug("downBytesPerSecondViaProxies += {} down-rate {}", bp, getDownBytesPerSecond());
     }
 
     /**
@@ -256,7 +256,7 @@ public class StatsTracker implements Stats {
     @Override
     public void addUpBytesForPeers(final long bp) {
         upBytesPerSecondForPeers.addData(bp);
-        log.debug("upBytesPerSecondForPeers += {} up-rate {}", bp, getUpBytesPerSecond());
+        //log.debug("upBytesPerSecondForPeers += {} up-rate {}", bp, getUpBytesPerSecond());
     }
     
     /**
@@ -265,7 +265,7 @@ public class StatsTracker implements Stats {
     @Override
     public void addDownBytesForPeers(final long bp) {
         downBytesPerSecondForPeers.addData(bp);
-        log.debug("downBytesPerSecondForPeers += {} down-rate {}", bp, getDownBytesPerSecond());
+        //log.debug("downBytesPerSecondForPeers += {} down-rate {}", bp, getDownBytesPerSecond());
     }
     
     /**
@@ -274,7 +274,7 @@ public class StatsTracker implements Stats {
     @Override
     public void addDownBytesFromPeers(final long bp) {
         downBytesPerSecondFromPeers.addData(bp);
-        log.debug("downBytesPerSecondFromPeers += {} down-rate {}", bp, getDownBytesPerSecond());
+        //log.debug("downBytesPerSecondFromPeers += {} down-rate {}", bp, getDownBytesPerSecond());
     }
     
     /** 
@@ -283,7 +283,7 @@ public class StatsTracker implements Stats {
     @Override
     public void addUpBytesToPeers(final long bp) {
         upBytesPerSecondToPeers.addData(bp);
-        log.debug("upBytesPerSecondToPeers += {} up-rate {}", bp, getUpBytesPerSecond());
+        //log.debug("upBytesPerSecondToPeers += {} up-rate {}", bp, getUpBytesPerSecond());
     }
 
     @Override

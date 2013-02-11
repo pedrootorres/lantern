@@ -156,7 +156,7 @@ public class Whitelist {
         if (StringUtils.isBlank(uri)) {
             return false;
         }
-        final String toMatch = normalized(toBaseUri(uri));
+        final String toMatch = toBaseUri(normalized(uri));
         return wl.contains(new WhitelistEntry(toMatch));
     }
     
@@ -179,11 +179,20 @@ public class Whitelist {
      * our whitelist, otherwise <code>false</code>.
      */
     public boolean isWhitelisted(final HttpRequest request) {
-        log.debug("Checking whitelist for request");
         final String uri = request.getUri();
-        log.debug("URI is: {}", uri);
-        final String referer = request.getHeader(HttpHeaders.Names.REFERER);
-        return isWhitelisted(referer) || isWhitelisted(uri);
+        final String referer;
+        Boolean uriWhitelisted = isWhitelisted(uri);
+        Boolean refererWhitelisted = false;
+        if(uriWhitelisted) {
+            log.debug("uri '{}' is whitelisted", uri);
+        } else { 
+            referer = request.getHeader(HttpHeaders.Names.REFERER);
+            refererWhitelisted = isWhitelisted(referer);
+            if(refererWhitelisted) {
+                log.debug("referer '{}' is whitelisted", referer);
+            }
+        }
+        return uriWhitelisted || refererWhitelisted;
     }
     
     private void addDefaultEntry(final String entry) {
@@ -241,7 +250,6 @@ public class Whitelist {
     }
 
     private String toBaseUri(final String uri) {
-        log.debug("Parsing full URI: {}", uri);
         final String afterHttp;
         if (!uri.startsWith("http")) {
             afterHttp = uri;
@@ -254,7 +262,6 @@ public class Whitelist {
         } else {
             base = afterHttp;
         }
-        log.debug("base uri: " + base);
 
         // http://html5pattern.com/ - changed slightly
         // just in case there is a port following
@@ -273,14 +280,11 @@ public class Whitelist {
                 domainExtension = StringUtils.substringBefore(domainExtension, ":");
             }
             String domain = StringUtils.substringBeforeLast(base, ".");
-            log.debug("Domain: {}", domain);
             final String[] majorTlds = {"com", "org", "net"};
             for (final String tld : majorTlds) {
                 if (domain.endsWith("."+tld)) {
                     domain = StringUtils.substringBeforeLast(domain, "."+tld);
                     domainExtension = tld + "." + domainExtension;
-                    log.debug("Domain: {}", domain);
-                    log.debug("domainExtension: {}", domainExtension);
                     break;
                 }
             }
@@ -292,7 +296,6 @@ public class Whitelist {
                 toMatchBase = domain;
             }
             final String toMatch = toMatchBase + "." + domainExtension;
-            log.debug("Matching against: {}", toMatch);
             return toMatch;
         }
     }

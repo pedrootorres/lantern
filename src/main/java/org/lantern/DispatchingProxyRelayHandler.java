@@ -33,6 +33,7 @@ import org.jboss.netty.handler.codec.http.HttpVersion;
 import org.jboss.netty.handler.ssl.SslHandler;
 import org.lantern.httpseverywhere.HttpsEverywhere;
 import org.lantern.state.Model;
+import org.lantern.Whitelist;
 import org.littleshoot.proxy.HttpConnectRelayingHandler;
 import org.littleshoot.proxy.ProxyUtils;
 import org.slf4j.Logger;
@@ -62,6 +63,9 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
     private final HttpRequestProcessor proxyRequestProcessor;
     
     private final HttpRequestProcessor laeRequestProcessor;
+
+    // http req processor for locally proxied requests not on the whitelist
+    private final HttpRequestProcessor localExitProcessor;
     
     private HttpRequestProcessor currentRequestProcessor;
 
@@ -80,6 +84,8 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
     private final LanternKeyStoreManager ksm;
 
     private final Model model;
+    
+    private final Whitelist whitelist;
 
     private final ProxyTracker proxyTracker;
 
@@ -110,6 +116,7 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
         this.model = model;
         this.proxyTracker = proxyTracker;
         this.httpsEverywhere = httpsEverywhere;
+        this.whitelist = this.model.getSettings().getWhitelist();
         this.proxyRequestProcessor =
             new DefaultHttpRequestProcessor(proxyTracker,
                 new HttpRequestTransformer() {
@@ -144,6 +151,7 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
                         return proxyTracker.getLaeProxy();
                     }
             }, this.clientChannelFactory, this.channelGroup, this.stats, this.ksm);
+        this.localExitProcessor = new LocalExitRequestProcessor(this);
     }
 
     @Override
@@ -185,6 +193,12 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
         final HttpRequest request = (HttpRequest)me.getMessage();
         final String uri = request.getUri();
         log.info("URI is: {}", uri);
+
+        if(whitelist.isWhitelisted(request)) {
+            log.debug("request is whitelisted...");
+        } else {
+            return this.dispatchExitRequest(ctx, me);
+        }
         
         // We need to set this outside of proxying rules because we first
         // send incoming messages down chunked versus unchunked paths and
@@ -221,6 +235,19 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
         this.stats.incrementProxiedRequests();
         return dispatchProxyRequest(ctx, me);
     }
+
+    private HttpRequestProcessor dispatchExitRequest(
+            final ChannelHandlerContext ctx, final MessageEvent ev) {
+        HttpRequest req = (HttpRequest)ev.getMessage();
+        log.debug("dispatching local proxy request for uri: {}", req.getUri());
+        try {
+            localExitProcessor.processRequest(browserToProxyChannel, ctx, ev);
+        } catch(IOException e) {
+            log.error("could not process proxied http request to: {}", req.getUri());
+        }
+        return null;
+    }
+
     
     private HttpRequestProcessor dispatchProxyRequest(
         final ChannelHandlerContext ctx, final MessageEvent me) {
@@ -485,5 +512,12 @@ public class DispatchingProxyRelayHandler extends SimpleChannelUpstreamHandler {
         log.info("Caught exception on INBOUND channel", e.getCause());
         ProxyUtils.closeOnFlush(this.browserToProxyChannel);
     }
-    
+
+    public ClientSocketChannelFactory getClientSocketChannelFactory() {
+        return this.clientChannelFactory;
+    }
+
+    public LanternKeyStoreManager getKeyStoreManager() {
+        return this.ksm;
+    }
 }
