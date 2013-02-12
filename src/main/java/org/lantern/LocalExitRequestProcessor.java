@@ -81,11 +81,12 @@ public class LocalExitRequestProcessor implements HttpRequestProcessor {
         if(tunnel) {
             ctx.getPipeline().remove("decoder");
             ctx.getPipeline().remove("handler");
+            // replace handler with the one below which simply pipes
+            // messages to the outgoing channel
             ctx.getPipeline().addLast("handler", new SimpleChannelUpstreamHandler() {
                 @Override
                 public void messageReceived(ChannelHandlerContext ctx,
                         MessageEvent ev) {
-                    log.debug("inbound msg rcvd on outbound channel");
                     connectFuture.getChannel().write(ev.getMessage());
                 }
 
@@ -120,7 +121,6 @@ public class LocalExitRequestProcessor implements HttpRequestProcessor {
                 throws Exception {
                 if (connectFuture.isSuccess()) {
                     log.debug("connected via exit handler");
-                    browserToProxyChannel.setReadable(true);
                     if(tunnel) {
                         log.debug("sending 200 response to CONNECT request (start tunneling)");
                         HttpResponse resp = new DefaultHttpResponse(
@@ -132,9 +132,23 @@ public class LocalExitRequestProcessor implements HttpRequestProcessor {
                         // after that, we need to drop it.
                         ctx.getPipeline().remove("encoder");
                     } else {
-                        log.debug("writing http request to dst");
+                        String uriPath;
+                        URI fwdReqUri;
+                        try {
+                            fwdReqUri = new URI(req.getUri());
+                            uriPath = fwdReqUri.getRawPath();
+                            if(fwdReqUri.getRawQuery() != null && 
+                                    fwdReqUri.getRawQuery().length() > 0) {
+                                uriPath += "?"+fwdReqUri.getRawQuery();
+                            }
+                        } catch(URISyntaxException e) {
+                            uriPath = req.getUri();
+                        }
+                        req.setUri(uriPath);
+                        log.debug("writing http request to dst: {}", req.getUri());
                         connectFuture.getChannel().write(req);
                     }
+                    browserToProxyChannel.setReadable(true);
                 } else {
                     log.debug("connect via exit handler failed");
                     browserToProxyChannel.close();
