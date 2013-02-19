@@ -165,7 +165,7 @@ public class LanternConstants {
     public static final boolean ON_APP_ENGINE;
 
     public static final int KSCOPE_ADVERTISEMENT = 0x2111;
-    public static final String KSCOPE_ADVERTISEMENT_KEY = "ksak";
+    public static final String KSCOPE_ADVERTISEMENT_KEY = "ksad";
 
     public static final Charset UTF8 = Charset.forName("UTF8");
     static {
