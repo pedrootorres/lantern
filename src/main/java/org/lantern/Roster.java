@@ -427,4 +427,8 @@ public class Roster implements RosterListener {
     public Set<String> getInvited() {
         return invited;
     }
+
+    public RandomRoutingTable getKscopeRoutingTable() {
+        return kscopeRoutingTable;
+    }
 }

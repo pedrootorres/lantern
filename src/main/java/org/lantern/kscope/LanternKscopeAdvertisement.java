@@ -1,13 +1,24 @@
 package org.lantern.kscope;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
+import org.kaleidoscope.TrustGraphAdvertisement;
+import org.kaleidoscope.TrustGraphNodeId;
+import org.kaleidoscope.BasicTrustGraphNodeId;
+
+import org.lantern.LanternUtils;
 
 /**
  * Advertisement for a Lantern node to be distributed using the Kaleidoscope
  * limited advertisement protocol.
  */
-public class LanternKscopeAdvertisement {
+public class LanternKscopeAdvertisement implements TrustGraphAdvertisement {
+
+    private final String sender;
 
     private final String jid;
     
@@ -17,7 +28,6 @@ public class LanternKscopeAdvertisement {
 
     private final int ttl;
 
-    // TODO: add cookie here (and proxy, obvs.)
     //private final String cookie;
 
     @Override
@@ -49,12 +59,31 @@ public class LanternKscopeAdvertisement {
         this(jid, addr.getHostAddress(), port, ttl);
     }
     
-    public LanternKscopeAdvertisement(final String jid, final String addr,
+    public LanternKscopeAdvertisement(final String adJid, final String addr,
             final int port, final int ttl) {
-        this.jid = jid;
+        this.jid = adJid;
         this.address = addr;
         this.port = port;
         this.ttl = ttl;
+        this.sender = adJid;
+    }
+
+    public LanternKscopeAdvertisement(final String senderJid,
+            final String adJid, final String addr, final int port,
+            final int ttl) {
+        this.jid = adJid;
+        this.address = addr;
+        this.port = port;
+        this.ttl = ttl;
+        this.sender = senderJid;
+    }
+
+    public TrustGraphNodeId getSender() {
+        return new BasicTrustGraphNodeId(this.sender);
+    }
+
+    public String getSenderJid() {
+        return this.sender;
     }
 
     public String getJid() {
@@ -69,8 +98,18 @@ public class LanternKscopeAdvertisement {
         return port;
     }
 
-    public int getTtl() {
+    public int getInboundTTL() {
         return ttl;
+    }
+
+    public String getPayload() {
+        Map<String, Object> payloadData = new HashMap<String, Object>();
+        payloadData.put("from", getSenderJid());
+        payloadData.put("address", getAddress());
+        payloadData.put("port", getPort());
+        payloadData.put("ttl", getInboundTTL());
+        String payload = LanternUtils.jsonify(payloadData);
+        return payload;
     }
 
     public boolean hasMappedEndpoint() {

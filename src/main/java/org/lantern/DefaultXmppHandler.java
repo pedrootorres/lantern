@@ -50,6 +50,7 @@ import org.kaleidoscope.BasicTrustGraphAdvertisement;
 import org.kaleidoscope.BasicTrustGraphNodeId;
 import org.kaleidoscope.TrustGraphNode;
 import org.kaleidoscope.TrustGraphNodeId;
+import org.kaleidoscope.TrustGraphAdvertisement;
 import org.lantern.event.ClosedBetaEvent;
 import org.lantern.event.Events;
 import org.lantern.event.GoogleTalkStateEvent;
@@ -962,7 +963,7 @@ public class DefaultXmppHandler implements XmppHandler {
                     (String) msg.getProperty(
                         LanternConstants.KSCOPE_ADVERTISEMENT_KEY);
                 if (StringUtils.isNotBlank(payload)) {
-                    processKscopePayload(payload);
+                    processKscopePayload(from, payload);
                 } else {
                     LOG.error("kscope ad with no payload? "+msg.toXML());
                 }
@@ -973,11 +974,18 @@ public class DefaultXmppHandler implements XmppHandler {
         }
     }
     
-    private void processKscopePayload(final String payload) {
+    private void processKscopePayload(final String sender, 
+            final String payload) {
         final ObjectMapper mapper = new ObjectMapper();
         try {
-            final LanternKscopeAdvertisement ad = 
+            // this is gross, but easier than reworking
+            // org.kaleidoscope.*
+            final LanternKscopeAdvertisement recvdAd = 
                 mapper.readValue(payload, LanternKscopeAdvertisement.class);
+            final LanternKscopeAdvertisement ad = new LanternKscopeAdvertisement(
+                sender, recvdAd.getJid(), recvdAd.getAddress(), recvdAd.getPort(), 
+                recvdAd.getInboundTTL()
+            );
             
             // If the ad includes a mapped port, include it as straight proxy.
             if (ad.hasMappedEndpoint()) {
@@ -985,6 +993,11 @@ public class DefaultXmppHandler implements XmppHandler {
                 this.proxyTracker.addGeneralProxy(proxy);
             }
             addPeerProxy(new URI(ad.getJid()));
+
+            // relay the ad
+            if(ad.getInboundTTL() > 0) {
+                relayKscopeAdvertisement(ad);
+            }
             
         } catch (final JsonParseException e) {
             LOG.warn("Could not parse JSON", e);
@@ -995,6 +1008,18 @@ public class DefaultXmppHandler implements XmppHandler {
         } catch (final URISyntaxException e) {
             LOG.error("Syntax exception with URI?", e);
         }
+    }
+
+    private void relayKscopeAdvertisement(final LanternKscopeAdvertisement ad) {
+        LanternKscopeAdvertisement adToRelay = new LanternKscopeAdvertisement(
+            ad.getJid(), ad.getAddress(), ad.getPort(), ad.getInboundTTL()-1
+        );
+
+        TrustGraphNodeId relayTo;
+        relayTo = this.roster.getKscopeRoutingTable().getNextHop(ad.getSender());
+        final TrustGraphNode tgn = 
+            new LanternTrustGraphNode(this);
+        tgn.sendAdvertisement(adToRelay, relayTo, adToRelay.getInboundTTL());
     }
 
     private void sendInfoResponse(final String from) {

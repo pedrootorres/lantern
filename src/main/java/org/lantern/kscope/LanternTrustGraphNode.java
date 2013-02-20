@@ -20,6 +20,11 @@ public class LanternTrustGraphNode extends TrustGraphNode {
     public LanternTrustGraphNode(final XmppHandler handler) {
         this.handler = handler;
     }
+
+    public void sendAdvertisement(final TrustGraphAdvertisement ad,
+            final TrustGraphNodeId sendTo) {
+        sendAdvertisement(ad, sendTo, ad.getInboundTTL()-1);
+    }
     
     @Override
     public void sendAdvertisement(final TrustGraphAdvertisement message,
