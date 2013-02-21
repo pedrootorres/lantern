@@ -42,6 +42,8 @@ import org.lantern.state.ModelService;
 import org.lantern.state.ModelUtils;
 import org.lantern.state.SyncService;
 import org.lantern.state.SyncStrategy;
+import org.lantern.kscope.LanternRandomRoutingTable;
+import org.kaleidoscope.RandomRoutingTable;
 import org.lantern.ui.SwtMessageService;
 import org.lantern.util.LanternHttpClient;
 import org.littleshoot.proxy.HttpRequestFilter;
@@ -83,10 +85,13 @@ public class LanternModule extends AbstractModule {
         bind(Model.class).toProvider(ModelIo.class).in(Singleton.class);
         
         bind(ModelService.class).to(DefaultModelService.class);
+
+        bind(RandomRoutingTable.class).to(LanternRandomRoutingTable.class);
         
         bind(CertTracker.class).to(DefaultCertTracker.class);
         bind(HttpsEverywhere.class);
         bind(Roster.class);
+        bind(LanternRandomRoutingTable.class);
         bind(InteractionServlet.class);
         bind(KeyStoreManager.class).to(LanternKeyStoreManager.class);
         bind(LanternTrustStore.class);

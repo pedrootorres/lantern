@@ -10,6 +10,8 @@ import org.lantern.LanternConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.lantern.kscope.LanternRandomRoutingTable;
+
 
 /**
  * State model of the application for the UI to display.
@@ -38,6 +40,8 @@ public class Model {
     private Modal modal = Modal.welcome;
 
     private Settings settings = new Settings();
+
+    private LanternRandomRoutingTable kscopeRoutes = new LanternRandomRoutingTable();
 
     private Connectivity connectivity = new Connectivity();
 
@@ -82,6 +86,14 @@ public class Model {
 
     public void setSettings(final Settings settings) {
         this.settings = settings;
+    }
+
+    public LanternRandomRoutingTable getKscopeRoutes() {
+        return kscopeRoutes;
+    }
+
+    public void setKscopeRoutes(final LanternRandomRoutingTable table) {
+        this.kscopeRoutes = table;
     }
 
     @JsonView({Run.class, Persistent.class})

@@ -50,7 +50,7 @@ public class ModelIo implements Provider<Model>, Shutdownable {
         this.modelFile = modelFile;
         this.encryptedFileService = encryptedFileService;
         this.model = read();
-        log.info("Loaded module");
+        log.info("Loaded model.");
     }
 
     @Override

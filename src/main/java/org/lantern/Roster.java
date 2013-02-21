@@ -19,13 +19,14 @@ import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.packet.Presence;
-import org.kaleidoscope.BasicRandomRoutingTable;
-import org.kaleidoscope.BasicTrustGraphNodeId;
 import org.kaleidoscope.RandomRoutingTable;
+import org.kaleidoscope.BasicTrustGraphNodeId;
+import org.lantern.kscope.LanternRandomRoutingTable;
 import org.kaleidoscope.TrustGraphNodeId;
 import org.lantern.event.Events;
 import org.lantern.event.ResetEvent;
 import org.lantern.event.UpdatePresenceEvent;
+import org.lantern.state.Model;
 import org.lantern.state.Model.Persistent;
 import org.lantern.state.Profile;
 import org.lantern.state.StaticSettings;
@@ -48,6 +49,8 @@ public class Roster implements RosterListener {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
+    private final LanternRandomRoutingTable kscopeRouteTable;
+
     private Map<String, LanternRosterEntry> rosterEntries =
         new ConcurrentSkipListMap<String, LanternRosterEntry>();
 
@@ -58,9 +61,6 @@ public class Roster implements RosterListener {
         new TreeMap<String, Profile>();
 
     private volatile boolean populated;
-
-    private final RandomRoutingTable kscopeRoutingTable =
-        new BasicRandomRoutingTable();
 
     private org.jivesoftware.smack.Roster smackRoster;
 
@@ -73,7 +73,8 @@ public class Roster implements RosterListener {
      * Creates a new roster.
      */
     @Inject
-    public Roster() {
+    public Roster(final LanternRandomRoutingTable routeTable) {
+        this.kscopeRouteTable = routeTable; 
         Events.register(this);
     }
 
@@ -104,7 +105,7 @@ public class Roster implements RosterListener {
                 }
                 populated = true;
                 log.debug("Finished populating roster");
-                log.info("kscope is: {}", kscopeRoutingTable);
+                log.info("kscope is: {}", getKscopeRoutingTable());
                 fullRosterSync();
             }
         };
@@ -147,7 +148,7 @@ public class Roster implements RosterListener {
         } else if (LanternUtils.isLanternJid(from)) {
             Events.eventBus().post(new UpdatePresenceEvent(presence));
             final TrustGraphNodeId id = new BasicTrustGraphNodeId(from);
-            this.kscopeRoutingTable.addNeighbor(id);
+            getKscopeRoutingTable().addNeighbor(id);
             onPresence(presence, sync, updateIndex);
         } else {
             onPresence(presence, sync, updateIndex);
@@ -368,7 +369,7 @@ public class Roster implements RosterListener {
         synchronized (rosterEntries) {
             this.rosterEntries.clear();
         }
-        this.kscopeRoutingTable.clear();
+        this.getKscopeRoutingTable().clear();
         this.populated = false;
     }
 
@@ -429,6 +430,6 @@ public class Roster implements RosterListener {
     }
 
     public RandomRoutingTable getKscopeRoutingTable() {
-        return kscopeRoutingTable;
+        return this.kscopeRouteTable;
     }
 }

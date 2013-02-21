@@ -585,7 +585,7 @@ public class DefaultXmppHandler implements XmppHandler {
                     }
                     
                     // Now turn the advertisement into JSON.
-                    final String payload = LanternUtils.jsonify(ad);
+                    final String payload = ad.getPayload();
                     
                     LOG.info("Sending kscope payload: {}", payload);
                     final BasicTrustGraphAdvertisement message =
