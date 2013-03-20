@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
@@ -569,6 +568,11 @@ public class LanternUtils {
             tempDir = Files.createTempDir();
             final File tempLib = new File(tempDir, fileName);
             is = jarRepresentative.getResourceAsStream("/" + fileName);
+            if (is == null) {
+                final String msg = "No file in jar named: "+fileName;
+                LOG.warn(msg);
+                throw new IOException(msg);
+            }
             FileUtils.copyInputStreamToFile(is, tempLib);
             System.load(tempLib.getAbsolutePath());
         } finally {
@@ -930,6 +934,11 @@ public class LanternUtils {
         return false;
     }
     
+    /**
+     * Modifies .desktop files on Ubuntu with out hack to set our icon.
+     * 
+     * @param path The path to the file.
+     */
     public static void addStartupWMClass(final String path) {
         final File desktopFile = new File(path);
         if (!desktopFile.isFile()) {
@@ -942,7 +951,9 @@ public class LanternUtils {
         }
         final Collection<?> lines = 
             Arrays.asList("StartupWMClass=127.0.0.1__"+
-            StaticSettings.getPrefix()+"/index.html");
+        
+            // We use the substring here to get rid of the leading "/"
+            StaticSettings.getPrefix().substring(1)+"/index.html");
         try {
             FileUtils.writeLines(desktopFile, "UTF-8", lines, true);
         } catch (final IOException e) {
