@@ -1,0 +1,4509 @@
+{
+  "PROXIED_REQUESTS" : 992,
+  "DIRECT_REQUESTS" : 0,
+  "global" : {
+    "bytesEver" : 0,
+    "bps" : 0,
+    "nusers" : {
+      "ever" : 2,
+      "online" : -2
+    },
+    "npeers" : {
+      "ever" : {
+        "get" : 772,
+        "give" : 25
+      },
+      "online" : {
+        "get" : 1,
+        "give" : 0
+      }
+    }
+  },
+  "DIRECT_BYTES" : 0,
+  "countries" : {
+    "VU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "VN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "EC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "VI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "DZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "VG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "VE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "DM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "DO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "VC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "VA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "DE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "UZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "UY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "DK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "DJ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "US" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 1,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 104,
+          "give" : 16
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "UM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "UG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "UA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ET" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ES" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 1
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 1
+        }
+      }
+    },
+    "ER" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "EH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "EG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "EE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TV" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GB" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "FR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "FO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "FK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "FJ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "FM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "FI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "WS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GQ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "WF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GP" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "GG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "RE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "RO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AQ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AX" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "QA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "AM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BV" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TJ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SV" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ST" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BB" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SX" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BQ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BJ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "TC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "BM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CX" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CV" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SJ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "RS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "RU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "RW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : -1
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 665,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 2,
+          "give" : 0
+        }
+      }
+    },
+    "SA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "SB" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "CL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LV" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ME" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ML" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MD" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MV" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MX" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MP" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MQ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "MS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NP" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "NO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "OM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PF" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "PA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "HK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ZA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "HN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "HM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "HR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "HT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "HU" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ZM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ZW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "ID" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IL" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IQ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "YE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IS" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "IT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "JE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "YT" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "JP" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "JO" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "JM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KH" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KG" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KE" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KP" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KR" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KM" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KN" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KW" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KY" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "KZ" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LA" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LC" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LB" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LI" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    },
+    "LK" : {
+      "bytesEver" : 0,
+      "bps" : 0,
+      "nusers" : {
+        "ever" : 0,
+        "online" : 0
+      },
+      "npeers" : {
+        "ever" : {
+          "get" : 0,
+          "give" : 0
+        },
+        "online" : {
+          "get" : 0,
+          "give" : 0
+        }
+      }
+    }
+  },
+  "UNCENSORED_USERS" : 0,
+  "CENSORED_USERS" : 0
+}
