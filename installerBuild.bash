@@ -9,11 +9,6 @@ function die() {
   exit 1
 }
 
-if [ $# -lt "1" ]
-then
-    die "$0: Received $# args... version required"
-fi
-
 test -f ../secure/bns-osx-cert-developer-id-application.p12 || die "Need OSX signing certificate at ../secure/bns-osx-cert-developer-id-application.p12"
 test -f ../secure/bns_cert.p12 || die "Need windows signing certificate at ../secure/bns_cert.p12"
 
@@ -25,17 +20,15 @@ printenv | grep INSTALL4J_MAC_PASS || die "Must have OSX signing key password de
 printenv | grep INSTALL4J_WIN_PASS || die "Must have windows signing key password defined in INSTALL4J_WIN_PASS"
 test -f $CONSTANTS_FILE || die "No constants file at $CONSTANTS_FILE?? Exiting"
 
-# XXX pull CURRENT_VERSION out of pom.xml
-CURRENT_VERSION="0.21.2-SNAPSHOT"
+CURRENT_VERSION=$(grep '<version>' pom.xml |head -1|sed 's,.*<version>\(.*\)</version>,\1,')
 fgrep $CURRENT_VERSION $VERSION_FILE &>/dev/null || die "CURRENT_VERSION \"$CURRENT_VERSION\" not found in pom.xml"
 
-# XXX calculate NEW_VERSION by stripping off "-SNAPSHOT" from CURRENT_VERSION
-NEW_VERSION=$1
-MVN_ARGS=$2
+NEW_VERSION=$(echo $CURRENT_VERSION|sed 's/-SNAPSHOT//')
+MVN_ARGS=$1
 echo "*******MAVEN ARGS*******: $MVN_ARGS"
-if [ $# -gt "2" ]
+if [ $# -gt "0" ]
 then
-    RELEASE=$3;
+    RELEASE=$1;
 else
     RELEASE=true;
 fi
@@ -45,8 +38,7 @@ git pull --no-rebase origin $curBranch || die '"git pull origin" failed?'
 git submodule update || die "git submodule update failed!!!"
 
 NEW_VERSION_WITH_SHA=$1-`git rev-parse HEAD | cut -c1-10`
-# XXX this relies on no other package's version in pom.xml coinciding with our $CURRENT_VERSION
-perl -pi -e "s/$CURRENT_VERSION/$NEW_VERSION/" $VERSION_FILE || die "s/$CURRENT_VERSION/$NEW_VERSION/ in pom.xml failed"
+perl -pi -e "$. < 10 && s/$CURRENT_VERSION/$NEW_VERSION/" $VERSION_FILE || die "s/$CURRENT_VERSION/$NEW_VERSION/ in pom.xml failed"
 
 # XXX do this automatically
 echo "Replaced $CURRENT_VERSION with $NEW_VERSION in pom.xml."

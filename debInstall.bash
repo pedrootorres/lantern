@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 
+#Do not run this directly.  Instead, use debInstall32Bit.bash or 
+#debInstall64Bit.bash
+
 function die() {
   echo $*
   exit 1
 }
 
-if [ $# -ne "4" ]
+if [ $# -ne "3" ]
 then
-    die "$0: Received $# args... version, whether or not this is a release, architecture, and build ID required"
+    die "$0: Received $# args...whether or not this is a release, architecture, and build ID required"
 fi
-VERSION=$1
-RELEASE=$2
-ARCH=$3
-BUILD_ID=$4
 
-./installerBuild.bash $VERSION "-Dbuildos=linux -Dsun.arch.data.model=$ARCH -Plinux,-mac,-windows" $RELEASE || die "Could not build!!"
+VERSION=$(grep '<version>' pom.xml |head -1|sed 's,.*<version>\(.*\)</version>,\1,'|sed 's/-SNAPSHOT//')
+RELEASE=$1
+ARCH=$2
+BUILD_ID=$3
+
+./installerBuild.bash "-Dbuildos=linux -Dsun.arch.data.model=$ARCH -Plinux,-mac,-windows,release" $RELEASE || die "Could not build!!"
 
 #install4jc -m linuxDeb -r $VERSION ./install/lantern.install4j || die "Could not build Linux installer?"
+
 install4jc -b $BUILD_ID -r $VERSION ./install/lantern.install4j || die "Could not build Linux installer?"
 
 name=lantern-$VERSION-$ARCH-bit.deb

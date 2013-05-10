@@ -5,9 +5,9 @@ function die() {
   exit 1
 }
 
-if [ $# -ne "2" ]
+if [ $# -ne "1" ]
 then
-    die "$0: Received $# args... version and whether or not this is a release required"
+    die "$0: Received $# args... whether or not this is a release required"
 fi
 #RELEASE=$2
 

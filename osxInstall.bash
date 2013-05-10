@@ -5,16 +5,16 @@ function die() {
   exit 1
 }
 
-if [ $# -lt "2" ]
+if [ $# -lt "1" ]
 then
-    die "$0: Received $# args... version and release (true or false) required"
+    die "$0: Received $# args... release (true or false) required"
 fi
 
-VERSION=$1
-RELEASE=$2;
+VERSION=$(grep '<version>' pom.xml |head -1|sed 's,.*<version>\(.*\)</version>,\1,'|sed 's/-SNAPSHOT//')
+RELEASE=$1
 
 echo "RELEASE flag is $RELEASE"
-./installerBuild.bash $VERSION "-Dsun.arch.data.model=64 -Pmac,-linux,-windows" $RELEASE || die "Could not build!!"
+./installerBuild.bash "-Dsun.arch.data.model=64 -Pmac,-linux,-windows,release" $RELEASE || die "Could not build!!"
 
 install4jc -v --mac-keystore-password=$INSTALL4J_MAC_PASS -m macos -r $VERSION ./install/lantern.install4j || die "Could not build installer?"
 
