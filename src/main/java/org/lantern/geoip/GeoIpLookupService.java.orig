@@ -2,8 +2,15 @@ package org.lantern.geoip;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
+<<<<<<< HEAD
+import it.unimi.dsi.fastutil.longs.AbstractLong2ObjectSortedMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectAVLTreeMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectSortedMap;
+
+=======
 
 import java.io.BufferedInputStream;
+>>>>>>> 408fe9dcbdf795d26a3bf4077cdc171f2c10fe88
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -106,6 +113,13 @@ public class GeoIpLookupService {
     private synchronized void loadData() {
         if (lowerRanges != null)
             return;
+<<<<<<< HEAD
+
+        lowerRanges = new IntArrayList();
+        upperRanges = new IntArrayList();
+        geoDataByIpRange = new ArrayList<GeoData>();
+=======
+>>>>>>> 408fe9dcbdf795d26a3bf4077cdc171f2c10fe88
 
         lowerRanges = new IntArrayList();
         upperRanges = new IntArrayList();
