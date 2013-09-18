@@ -60,12 +60,12 @@ public class ClientFriend implements Friend {
         this.email = email;
     }
 
-    @Override
+    //@Override
     public String getName() {
         return name;
     }
 
-    @Override
+    //@Override
     public void setName(String name) {
         this.name = name;
     }
