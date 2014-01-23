@@ -1,15 +1,11 @@
 package org.lantern.state;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,7 +17,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.commons.io.IOUtils;
+import javax.security.auth.login.CredentialException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.jivesoftware.smack.RosterEntry;
@@ -40,7 +37,7 @@ import org.lantern.event.ResetEvent;
 import org.lantern.kscope.ReceivedKScopeAd;
 import org.lantern.network.NetworkTracker;
 import org.lantern.state.Friend.Status;
-import org.lantern.state.Notification.MessageType;
+import org.lantern.state.Friend.SuggestionReason;
 import org.lantern.ui.FriendNotificationDialog;
 import org.lantern.ui.NotificationManager;
 import org.lantern.util.Threads;
@@ -50,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
-import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -151,7 +147,7 @@ public class DefaultFriendsHandler implements FriendsHandler {
                 
                 Collection<ClientFriend> friends = Collections.emptyList();
                 try {
-                    final List<ClientFriend> serverFriends = api.listFriends();
+                    final ClientFriend[] serverFriends = api.listFriends();
                     log.debug("All friends from server: {}", serverFriends);
                     for (final ClientFriend friend : serverFriends) {
                         tempFriends.put(friend.getEmail().toLowerCase(), friend);
@@ -164,6 +160,11 @@ public class DefaultFriendsHandler implements FriendsHandler {
                     friendsLoaded.set(true);
                     return tempFriends;
                 } catch (final IOException e) {
+                    log.error("Could not list friends?", e);
+                    friends = Collections.emptyList();
+                    friendsLoaded.set(false);
+                    return Collections.emptyMap();
+                } catch (final CredentialException e) {
                     log.error("Could not list friends?", e);
                     friends = Collections.emptyList();
                     friendsLoaded.set(false);
@@ -185,7 +186,6 @@ public class DefaultFriendsHandler implements FriendsHandler {
         // If the friend previously didn't exist or was rejected, friend them.
         if (existingFriend == null) {
             log.debug("Adding friend...");
-            //friend = addAndInvite(email);
             final ClientFriend temp = getOrCreateFriend(email);
             temp.setStatus(Status.friend);
             // We add the friend here even though it's not actually on the 
@@ -201,23 +201,20 @@ public class DefaultFriendsHandler implements FriendsHandler {
                 // This will overwrite the temporary friend above.
                 put(cf);
                 try {
-                    invite(cf, true);
-                    try {
-                        subscribe(email);
-                    } catch (final IOException e) {
-                        this.msgs.error(MessageKey.ERROR_EMAILING_FRIEND, e, 
-                                email);
-                        fullRemove(cf);
-                    }
+                    subscribe(email);
                 } catch (final IOException e) {
                     this.msgs.error(MessageKey.ERROR_EMAILING_FRIEND, e, 
                             email);
-                    
                     fullRemove(cf);
                 }
             } catch (final IOException e) {
                 this.msgs.error(MessageKey.ERROR_ADDING_FRIEND, e, email);
                 remove(email);
+                syncFriends();
+            } catch (final CredentialException e) {
+                this.msgs.error(MessageKey.ERROR_ADDING_FRIEND, e, email);
+                remove(email);
+                syncFriends();
             }
             
         } else {
@@ -243,28 +240,23 @@ public class DefaultFriendsHandler implements FriendsHandler {
                 // to remove any notification dialogs for the friend, for 
                 // example.
                 sync(existingFriend);
+                Exception exc = null;
                 try {
                     update(existingFriend);
+                    xmppHandler.addToRoster(email);
+                    return;
                 } catch (IOException e) {
-                    log.error("Could not friend?", e);
-                    this.msgs.error(MessageKey.ERROR_UPDATING_FRIEND, e, email);
-                    
-                    // Set the friend back to his or her original status!
-                    existingFriend.setStatus(originalStatus);
-                    sync(existingFriend);
-                    return;
+                    exc = e;
+                } catch (CredentialException e) {
+                    exc = e;
                 }
-                try {
-                    invite(existingFriend, true);
-                } catch (final IOException e) {
-                    this.msgs.error(MessageKey.ERROR_ADDING_FRIEND, e, email);
-                    
-                    // Set the friend back to his or her original status!
-                    existingFriend.setStatus(originalStatus);
-                    sync(existingFriend);
-                    return;
-                }
-
+                log.error("Could not friend?", exc);
+                this.msgs.error(MessageKey.ERROR_UPDATING_FRIEND, exc, email);
+                
+                // Set the friend back to his or her original status!
+                existingFriend.setStatus(originalStatus);
+                sync(existingFriend);
+                
                 break;
             default:
                 break;
@@ -281,12 +273,16 @@ public class DefaultFriendsHandler implements FriendsHandler {
         } catch (final IOException ioe) {
             // We've already messaged the user about an error above.
             //log.error("Error removing "+email+".", ioe);
+        } catch (final CredentialException e) {
+            
         }
     }
 
     private void subscribe(final String email) throws IOException {
         if (this.xmppHandler != null) {
             try {
+                this.xmppHandler.addToRoster(email);
+                
                 //if they have requested a subscription to us, we'll accept it.
                 this.xmppHandler.subscribed(email);
     
@@ -316,25 +312,6 @@ public class DefaultFriendsHandler implements FriendsHandler {
             networkTracker.userTrusted(friend.getEmail());
         } else if (isRejected(friend)){
             networkTracker.userUntrusted(friend.getEmail());
-        }
-    }
-    
-    private void invite(final Friend friend, final boolean addToRoster) 
-            throws IOException {
-        final String email = friend.getEmail();
-        
-        // Can be null for testing...
-        if (this.xmppHandler == null) {
-            log.error("Null XMPP handler");
-            return;
-        }
-        try {
-            if (this.xmppHandler.sendInvite(friend, false, addToRoster)) {
-                this.msgs.info(MessageKey.ADDED_FRIEND, email);
-            }
-        } catch (final Throwable e) {
-            this.msgs.error(MessageKey.ERROR_ADDING_FRIEND, email);
-            throw new IOException("Invite failed", e);
         }
     }
     
@@ -435,6 +412,7 @@ public class DefaultFriendsHandler implements FriendsHandler {
                 log.debug("We already know about the friend");
                 return;
             }
+            friend.setReason(SuggestionReason.runningLantern);
             final ClientFriend onServer = insert(friend);
             syncFriends();
             
@@ -445,10 +423,16 @@ public class DefaultFriendsHandler implements FriendsHandler {
             friendNotification(onServer);
         } catch (final IOException e) {
             log.warn("Could not update?", e);
+        } catch (CredentialException e) {
+            log.warn("Could not update?", e);
         }
     }
 
     private void friendNotification(final ClientFriend friend) {
+        // Ox: friend notifications are disabled at the moment
+        if (true) {
+            return;
+        }
         final Settings settings = model.getSettings();
         if (!settings.isUiEnabled()) {
             log.debug("UI not enabled");
@@ -516,6 +500,10 @@ public class DefaultFriendsHandler implements FriendsHandler {
             put(updated);
             this.msgs.info(MessageKey.REMOVED_FRIEND, email);
         } catch (final IOException e) {
+            this.msgs.error(MessageKey.ERROR_REMOVING_FRIEND, e, email);
+            friend.setStatus(existingStatus);
+            sync(friend);
+        } catch (CredentialException e) {
             this.msgs.error(MessageKey.ERROR_REMOVING_FRIEND, e, email);
             friend.setStatus(existingStatus);
             sync(friend);
@@ -608,6 +596,9 @@ public class DefaultFriendsHandler implements FriendsHandler {
         } catch (final IOException e) {
             friend.setStatus(originalStatus);
             sync(friend);
+        } catch (CredentialException e) {
+            friend.setStatus(originalStatus);
+            sync(friend);
         }
     }
 
@@ -636,8 +627,10 @@ public class DefaultFriendsHandler implements FriendsHandler {
         // of delivering subscription requests, so we just track them on the
         // client.
         if (friend != null) {
+            log.debug("Subscription request was from known friend");
             friend.setPendingSubscriptionRequest(true);
         } else {
+            log.debug("Subscription request was from unknown user");
             // This subscription request is from someone we don't know, and it
             // may not even be from lantern.
             final ClientFriend newFriend = new ClientFriend(from);
@@ -647,13 +640,15 @@ public class DefaultFriendsHandler implements FriendsHandler {
         syncFriends();
     }
 
-    private ClientFriend insert(final ClientFriend friend) throws IOException {
+    private ClientFriend insert(final ClientFriend friend) throws IOException, 
+        CredentialException {
         final ClientFriend updated = this.api.insertFriend(friend);
         put(updated);
         return updated;
     }
 
-    private ClientFriend update(final ClientFriend friend) throws IOException {
+    private ClientFriend update(final ClientFriend friend) throws IOException, 
+        CredentialException {
         final ClientFriend updated = this.api.updateFriend(friend);
         put(updated);
         return updated;
@@ -670,6 +665,8 @@ public class DefaultFriendsHandler implements FriendsHandler {
             try {
                 update(friend);
             } catch (IOException e) {
+                log.warn("Could not update name", e);
+            } catch (CredentialException e) {
                 log.warn("Could not update name", e);
             }
         }
@@ -712,79 +709,8 @@ public class DefaultFriendsHandler implements FriendsHandler {
         }
         
         log.debug("BulkInvite: Found lantern-bulk-friends.txt");
-        if (!this.xmppHandler.isLoggedIn()) {
-            log.debug("BulkInvite: Unable to process lantern-bulk-friends.txt. Not logged in?");
-            return;
-        }
-        
-        log.debug("BulkInvite: Processing lantern-bulk-friends.txt");
-        final File processing = 
-            new File(file.getParentFile(), file.getName()+".processing");
-        
-        try {
-            Files.move(file, processing);
-        } catch (final IOException e) {
-            log.error("BulkInvite: Could not move bulk invites file to .processing?", e);
-            return;
-        }
-        
-        int numberOfPeopleInvited = 0;
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(processing)));
-            String email = null;
-            while ((email = br.readLine()) != null) {
-                email = email.trim();
-                log.debug("BulkInvite: Considering inviting: {}", email);
-                
-                if (StringUtils.isBlank(email)) {
-                    log.debug("BulkInvite: Skipping blank line");
-                    continue;
-                }
-                
-                if (!email.contains("@")) {
-                    log.warn("BulkInvite: Not an email, skipping: {}", email);
-                    continue;
-                }
-                
-                if (email.startsWith("#")) {
-                    log.debug("BulkInvite: Email commented out: {}", email);
-                    email = br.readLine();
-                    continue;
-                }
-                
-                final Friend friend = getOrCreateFriend(email.trim());
-                invite(friend, false);
-                log.debug("BulkInvite: Invited {}", email);
-                numberOfPeopleInvited += 1;
-                
-                log.debug("BulkInvite: Invited {} so far", numberOfPeopleInvited);
-                
-                // Wait a bit between each one!
-                try {
-                    Thread.sleep(6000);
-                } catch (InterruptedException e) {
-                }
-            }
-            
-            String message = String.format("Bulk invited %1$s people",
-                    numberOfPeopleInvited);
-            this.msgs.msg(message, MessageType.info, 5);
-            log.debug("BulkInvite: {}", message);
-        } catch (final IOException e) {
-            log.error("BulkInvite: Could not find file?", e);
-        } finally {
-            IOUtils.closeQuietly(br);
-            
-            File processed = 
-                    new File(file.getParentFile(), file.getName()+".processed");
-            try {
-                Files.move(processing, processed);
-            } catch (final IOException e) {
-                log.warn("BulkInvite: Could not move bulk invites file to .processed?", e);
-                return;
-            }  
-        }
+        log.warn("Bulk invites are currently disabled");
+        return;
     }
 
     @Override
@@ -800,4 +726,5 @@ public class DefaultFriendsHandler implements FriendsHandler {
         this.loadedFriends = null;
         this.friends().clear();
     }
+    
 }

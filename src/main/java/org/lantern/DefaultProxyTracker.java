@@ -3,10 +3,7 @@ package org.lantern;
 import static org.lantern.state.Peer.Type.*;
 import static org.littleshoot.util.FiveTuple.Protocol.*;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -16,23 +13,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.SystemUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.lantern.event.Events;
 import org.lantern.event.ModeChangedEvent;
 import org.lantern.event.ProxyConnectionEvent;
@@ -49,7 +41,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
-import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -66,8 +57,8 @@ public class DefaultProxyTracker implements ProxyTracker {
 
     private final ProxyPrioritizer PROXY_PRIORITIZER = new ProxyPrioritizer();
 
-    private final ExecutorService p2pSocketThreadPool =
-            Threads.newCachedThreadPool("P2P-Socket-Creation-Thread-");
+    private final ExecutorService p2pSocketThreadPool = Threads
+            .newCachedThreadPool("P2P-Socket-Creation-Thread-");
 
     /**
      * Holds all proxies.
@@ -83,16 +74,10 @@ public class DefaultProxyTracker implements ProxyTracker {
      * Thread pool for checking connections to proxies -- otherwise these can
      * hold up the XMPP processing thread or any other calling thread.
      */
-    private final ExecutorService proxyCheckThreadPool =
-            Threads.newCachedThreadPool("Proxy-Connection-Check-Pool-");
-
-    private final XmppHandler xmppHandler;
+    private final ExecutorService proxyCheckThreadPool = Threads
+            .newCachedThreadPool("Proxy-Connection-Check-Pool-");
 
     private final AtomicBoolean proxiesPopulated = new AtomicBoolean(false);
-
-    private String fallbackServerHost;
-
-    private int fallbackServerPort;
 
     private final ScheduledExecutorService proxyRetryService = Threads
             .newSingleThreadScheduledExecutor("Proxy-Retry");
@@ -114,11 +99,9 @@ public class DefaultProxyTracker implements ProxyTracker {
     @Inject
     public DefaultProxyTracker(final Model model,
             final PeerFactory peerFactory,
-            final XmppHandler xmppHandler,
             final LanternTrustStore lanternTrustStore) {
         this.model = model;
         this.peerFactory = peerFactory;
-        this.xmppHandler = xmppHandler;
         this.lanternTrustStore = lanternTrustStore;
 
         // Periodically restore timed in proxies
@@ -134,11 +117,7 @@ public class DefaultProxyTracker implements ProxyTracker {
 
     @Override
     public void start() {
-        if (this.model.getSettings().getMode() == Mode.get) {
-            prepopulateProxies();
-        } else {
-            LOG.debug("Not adding proxies in give mode...");
-        }
+        prepopulateProxies();
     }
 
     @Override
@@ -182,7 +161,7 @@ public class DefaultProxyTracker implements ProxyTracker {
             }
         }
 
-        addProxy(jid, address, Type.pc);
+        addProxy(jid, address, Type.pc, TCP, null);
     }
 
     @Override
@@ -273,13 +252,13 @@ public class DefaultProxyTracker implements ProxyTracker {
         return null;
     }
 
-    private void addProxy(URI jid, InetSocketAddress address, Type type) {
-        boolean canAddAsTCP = address != null && address.getPort() > 0
-                && this.model.getSettings().isTcp();
-        FiveTuple fiveTuple = canAddAsTCP ? new FiveTuple(null, address, TCP) :
-                EMPTY_UDP_TUPLE;
+    private void addProxy(URI jid, InetSocketAddress address, Type type, Protocol protocol, String lanternAuthToken) {
+        boolean natTraversed = address == null || address.getPort() == 0;
+        FiveTuple fiveTuple = !natTraversed ? new FiveTuple(null, address, protocol)
+                : EMPTY_UDP_TUPLE;
         ProxyHolder proxy = new ProxyHolder(this, peerFactory,
-                lanternTrustStore, jid, fiveTuple, type);
+                lanternTrustStore, jid, fiveTuple, type, natTraversed,
+                lanternAuthToken);
         doAddProxy(jid, proxy);
     }
 
@@ -299,9 +278,15 @@ public class DefaultProxyTracker implements ProxyTracker {
 
     private void checkConnectivityToProxy(ProxyHolder proxy) {
         if (proxy.isNatTraversed()) {
-            checkConnectivityToNattedProxy(proxy);
+            // NAT traversed UDP proxies are currently disabled
+            // checkConnectivityToNattedProxy(proxy);
         } else {
-            checkConnectivityToTcpProxy(proxy);
+            if (proxy.getFiveTuple().getProtocol() == TCP) {
+                checkConnectivityToTcpProxy(proxy);
+            } else {
+                // TODO: need to actually test UDT connectivity somehow
+                successfullyConnectedToProxy(proxy);
+            }
         }
     }
 
@@ -327,41 +312,6 @@ public class DefaultProxyTracker implements ProxyTracker {
                     }
                 } finally {
                     IOUtils.closeQuietly(sock);
-                }
-            }
-        });
-    }
-
-    private void checkConnectivityToNattedProxy(final ProxyHolder proxy) {
-        p2pSocketThreadPool.submit(new Runnable() {
-            @Override
-            public void run() {
-                // TODO: In the past we created a bunch of connections here -
-                // a socket pool -- to avoid dealing with connection time
-                // delays. We should probably do that again!.
-                try {
-                    LOG.debug("Opening outgoing peer...");
-                    // Not sure what this is for
-                    Map<URI, AtomicInteger> peerFailureCount =
-                            new HashMap<URI, AtomicInteger>();
-                    final FiveTuple newFiveTuple = LanternUtils.openOutgoingPeer(
-                            proxy.getJid(), xmppHandler.getP2PClient(),
-                            peerFailureCount);
-                    
-                    ProxyHolder newProxy = new ProxyHolder(DefaultProxyTracker.this,
-                            peerFactory,
-                            lanternTrustStore,
-                            proxy.getJid(),
-                            newFiveTuple,
-                            proxy.getType());
-                    LOG.debug("Got tuple and adding it for proxy: {}", newProxy);
-                    proxies.add(newProxy);
-                    successfullyConnectedToProxy(newProxy);
-                    proxies.remove(proxy);
-                    LOG.debug("Proxies is now {}", proxies);
-                } catch (final IOException e) {
-                    LOG.info("Could not create peer socket", e);
-                    proxy.addFailure();
                 }
             }
         });
@@ -394,8 +344,7 @@ public class DefaultProxyTracker implements ProxyTracker {
 
         LOG.debug("Dispatching CONNECTED event");
         Events.asyncEventBus().post(
-                new ProxyConnectionEvent(
-                        ConnectivityStatus.CONNECTED));
+                new ProxyConnectionEvent(ConnectivityStatus.CONNECTED));
 
         notifyProxiesSize();
     }
@@ -409,6 +358,11 @@ public class DefaultProxyTracker implements ProxyTracker {
         }
         model.getConnectivity().setNProxies(numberOfConnectedProxies);
         Events.sync(SyncPath.CONNECTIVITY_NPROXIES, numberOfConnectedProxies);
+        
+        if (numberOfConnectedProxies == 0) {
+            Events.asyncEventBus().post(
+                    new ProxyConnectionEvent(ConnectivityStatus.DISCONNECTED));
+        }
     }
 
     private void restoreTimedInProxies() {
@@ -442,10 +396,6 @@ public class DefaultProxyTracker implements ProxyTracker {
 
     private void prepopulateProxies() {
         LOG.debug("Attempting to pre-populate proxies");
-        if (this.model.getSettings().getMode() == Mode.give) {
-            LOG.debug("Not loading proxies in give mode");
-            return;
-        }
         if (this.proxiesPopulated.get()) {
             LOG.debug("Proxies already populated!");
             return;
@@ -454,7 +404,7 @@ public class DefaultProxyTracker implements ProxyTracker {
         addFallbackProxies();
 
         // For now, we don't pre-populate stored proxies that are not standard
-        // fallbacks because we don't have a way to exchange updated 
+        // fallbacks because we don't have a way to exchange updated
         // certificates with them yet (we do that
         // over XMPP, but at this point we don't even have a fallback so may
         // not be able to connected to XMPP...chicken/egg).
@@ -462,112 +412,35 @@ public class DefaultProxyTracker implements ProxyTracker {
 
     private void addFallbackProxies() {
         LOG.debug("Attempting to add fallback proxies");
-        parseFallbackProxy();
-        addSingleFallbackProxy(fallbackServerHost, fallbackServerPort);
-
-        final File file = new File(SystemUtils.USER_HOME, "fallbacks.json");
-        if (!file.isFile()) {
-            LOG.info("No fallback proxies in: {}", file.getAbsolutePath());
-            return;
+        FallbackProxy fallbackProxy = FallbackProxy.readConfigured();
+        if (fallbackProxy == null) {
+            LOG.error("No fallback proxy found!");
         }
-        final ObjectMapper om = new ObjectMapper();
-        InputStream is = null;
-
-        try {
-            is = new FileInputStream(file);
-            final String proxy = IOUtils.toString(is);
-            final FallbackProxies all = om.readValue(proxy,
-                    FallbackProxies.class);
-            final Collection<FallbackProxy> proxies = all.getProxies();
-            for (final FallbackProxy fp : proxies) {
-                LOG.debug("Adding fallback: {}", fp);
-                addSingleFallbackProxy(fp.getIp(), fp.getPort());
-            }
-        } catch (final IOException e) {
-            LOG.error("Could not load fallback proxies?");
-        }
+        addSingleFallbackProxy(fallbackProxy);
     }
 
-    private void addSingleFallbackProxy(final String host, final int port) {
+    private void addSingleFallbackProxy(FallbackProxy fallbackProxy) {
         LOG.debug("Attempting to add single fallback proxy");
-        if (this.model.getSettings().isTcp()) {
-            final URI uri =
-                    LanternUtils.newURI("fallback-" + host + "@getlantern.org");
-            final Peer cloud = this.peerFactory.addPeer(uri, Type.cloud);
-            cloud.setMode(org.lantern.state.Mode.give);
+        final URI uri = LanternUtils.newURI("fallback-" + fallbackProxy.getIp()
+                + "@getlantern.org");
+        final Peer cloud = this.peerFactory.addPeer(uri, Type.cloud);
+        cloud.setMode(org.lantern.state.Mode.give);
 
-            LOG.debug("Adding fallback: {}", host);
-            addProxy(uri, LanternUtils.isa(host, port), Type.cloud);
-        }
+        LOG.debug("Adding fallback: {}", fallbackProxy.getIp());
+        Protocol protocol = "udp".equalsIgnoreCase(fallbackProxy.getProtocol()) ?
+            UDP : TCP;
+        addProxy(uri, LanternUtils.isa(fallbackProxy.getIp(),
+                fallbackProxy.getPort()), Type.cloud, protocol,
+                fallbackProxy.getAuth_token());
     }
 
     @Override
     public InetSocketAddress addressForConfiguredFallbackProxy() {
-        try {
-            copyFallback();
-        } catch (final IOException e) {
-            LOG.warn("Could not copy fallback?", e);
-        }
-        final File file =
-                new File(LanternClientConstants.CONFIG_DIR, "fallback.json");
-        if (!file.isFile()) {
-            LOG.error("No fallback proxy to load!");
+        FallbackProxy fp = FallbackProxy.readConfigured();
+        if (fp == null) {
             return null;
         }
-
-        final ObjectMapper om = new ObjectMapper();
-        InputStream is = null;
-        try {
-            is = new FileInputStream(file);
-            final String proxy = IOUtils.toString(is);
-            final FallbackProxy fp = om.readValue(proxy, FallbackProxy.class);
-
-            return new InetSocketAddress(fp.getIp(), fp.getPort());
-        } catch (final IOException e) {
-            LOG.error("Could not load fallback", e);
-            return null;
-        } finally {
-            IOUtils.closeQuietly(is);
-        }
-    }
-    
-    private void parseFallbackProxy() {
-        InetSocketAddress fallbackAddress = addressForConfiguredFallbackProxy();
-        if (fallbackAddress != null) {
-            fallbackServerHost = fallbackAddress.getAddress().getHostAddress();
-            fallbackServerPort = fallbackAddress.getPort();
-            LOG.debug("Set fallback proxy to {}:{}",
-                      fallbackServerHost,
-                      fallbackServerPort);
-        }
-    }
-
-    private void copyFallback() throws IOException {
-        LOG.debug("Copying fallback file");
-        final File from;
-
-        final File cur =
-                new File(new File(SystemUtils.USER_HOME), "fallback.json");
-        if (cur.isFile()) {
-            from = cur;
-        } else {
-            LOG.debug("No fallback proxy found in home - checking runtime user.dir...");
-            final File home = new File(new File(SystemUtils.USER_DIR),
-                    "fallback.json");
-            if (home.isFile()) {
-                from = home;
-            } else {
-                LOG.warn("Still could not find fallback proxy!");
-                return;
-            }
-        }
-        final File par = LanternClientConstants.CONFIG_DIR;
-        final File to = new File(par, from.getName());
-        if (!par.isDirectory() && !par.mkdirs()) {
-            throw new IOException("Could not make config dir?");
-        }
-        LOG.debug("Copying from {} to {}", from, to);
-        Files.copy(from, to);
+        return new InetSocketAddress(fp.getIp(), fp.getPort());
     }
 
     /**

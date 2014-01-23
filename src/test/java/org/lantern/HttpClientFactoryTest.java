@@ -43,7 +43,7 @@ public class HttpClientFactoryTest {
         //System.setProperty("javax.net.debug", "ssl");
         
         Launcher.configureCipherSuites();
-        TestingUtils.doWithWithGetModeProxy(new Callable<Void>() {
+        TestingUtils.doWithGetModeProxy(new Callable<Void>() {
            @Override
             public Void call() throws Exception {
                final HttpClientFactory factory = 
@@ -92,11 +92,10 @@ public class HttpClientFactoryTest {
         final HttpClient client = factory.newClient();
         TestingUtils.assertIsUsingGetModeProxy(client);
 
-        TestingUtils.doWithWithGetModeProxy(new Callable<Void>() {
+        TestingUtils.doWithGetModeProxy(new Callable<Void>() {
            @Override
             public Void call() throws Exception {
                 testExceptional(client);
-                testGoogleDocs(factory);
                 testStats(client);
                 return null;
             } 
@@ -112,22 +111,6 @@ public class HttpClientFactoryTest {
         final int code = line.getStatusCode();
         get.reset();
         assertEquals(200, code);
-    }
-
-    private void testGoogleDocs(final HttpClientFactory clientFactory) 
-        throws Exception {
-        final LanternFeedback feedback = spy(new LanternFeedback(clientFactory));
-        when(feedback.getHttpPost(anyString())).thenAnswer(new Answer<HttpPost>() {
-            @Override
-            public HttpPost answer(InvocationOnMock invocation) {
-                HttpPost mockPost = spy(new HttpPost(LanternFeedback.HOST));
-                doNothing().when(mockPost).setEntity((HttpEntity)any());
-                return mockPost;
-            }
-        });
-        final int responseCode =
-            feedback.submit("Testing", "lanternftw@gmail.com");
-        assertEquals(200, responseCode);
     }
 
     private void testExceptional(final HttpClient client)

@@ -2,15 +2,20 @@ package org.lantern.endpoints;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.lantern.LanternClientConstants;
 import org.lantern.TestingUtils;
 import org.lantern.oauth.OauthUtils;
 import org.lantern.oauth.RefreshToken;
 import org.lantern.state.ClientFriend;
 import org.lantern.state.Friend;
+import org.lantern.state.Friend.SuggestionReason;
 import org.lantern.state.Mode;
 import org.lantern.state.Model;
 import org.lantern.util.HttpClientFactory;
@@ -25,10 +30,20 @@ import org.slf4j.LoggerFactory;
 public class FriendEndpointTest {
     
     private final Logger log = LoggerFactory.getLogger(getClass());
-
+    
+    @BeforeClass
+    public static void setUpOnce() {
+        LanternClientConstants.setControllerId("oxlanternctrl");
+    }
+    
+    @AfterClass
+    public static void tearDownOnce() {
+        LanternClientConstants.setControllerId("lanternctrl");
+    }
+    
     @Test
-    public void testFriendEndpiont() throws Exception {
-        TestingUtils.doWithWithGetModeProxy(new Callable<Void>() {
+    public void testFriendEndpoint() throws Exception {
+        TestingUtils.doWithGetModeProxy(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
                 final HttpClientFactory httpClientFactory = 
@@ -36,10 +51,10 @@ public class FriendEndpointTest {
                 final Model model = TestingUtils.newModel();
                 model.getSettings().setMode(Mode.give);
                 final OauthUtils utils = new OauthUtils(httpClientFactory, model, new RefreshToken(model));
-                final FriendApi api = new FriendApi(utils);
+                final FriendApi api = new FriendApi(utils, model);
                 
                 // First just clear the existing friends.
-                List<ClientFriend> friends = api.listFriends();
+                List<ClientFriend> friends = realFriends(api.listFriends());
                     
                 log.debug("Deleting all friends from: {}", friends);
                 for (final ClientFriend f : friends) {
@@ -47,12 +62,13 @@ public class FriendEndpointTest {
                     api.removeFriend(id);
                     // Give the db a chance to sync.
                     log.debug("Removing friend: {}", f);
-                    Thread.sleep(50);
+                    //Thread.sleep(50);
                 }
                 
                 final ClientFriend friend = new ClientFriend();
                 friend.setEmail("test@test.com");
                 friend.setName("Tester");
+                friend.setReason(SuggestionReason.runningLantern);
                 api.insertFriend(friend);
                 
                 final Stopwatch friendsWatch = 
@@ -62,7 +78,7 @@ public class FriendEndpointTest {
                 friends = null;
                 for (int i = 0; i < 2; i++) {
                     friendsWatch.start();
-                    friends = api.listFriends();
+                    friends = realFriends(api.listFriends());
                     
                     friendsWatch.stop();
                     log.debug("Deleting all friends from: {}", friends);
@@ -71,7 +87,7 @@ public class FriendEndpointTest {
                         api.removeFriend(id);
                         // Give the db a chance to sync.
                         log.debug("Removing friend: {}", f);
-                        Thread.sleep(200);
+                        //Thread.sleep(200);
                     }
                     friendsWatch.logSummary();
                 }
@@ -89,9 +105,9 @@ public class FriendEndpointTest {
                 }
                 */
                 
-                Thread.sleep(2000);
+                //Thread.sleep(2000);
                 
-                final List<ClientFriend> postDelete = api.listFriends();
+                final List<ClientFriend> postDelete = realFriends(api.listFriends());
                 
                 assertEquals("Did not successfully delete friends?", 0, postDelete.size());
                 
@@ -101,10 +117,10 @@ public class FriendEndpointTest {
                 inserted.setEmail(updatedName);
                 final Friend updated = api.updateFriend(inserted);
                 
-                Thread.sleep(4000);
+                //Thread.sleep(4000);
                 assertEquals(updatedName, updated.getEmail());
                 
-                final List<ClientFriend> newList = api.listFriends();
+                final List<ClientFriend> newList = realFriends(api.listFriends());
                 for (final ClientFriend f : newList) {
                     assertEquals(updatedName, f.getEmail());
                     
@@ -114,13 +130,23 @@ public class FriendEndpointTest {
                     
                     api.removeFriend(id);
                     // Give the db a chance to sync.
-                    Thread.sleep(100);
+                    //Thread.sleep(100);
                 }
                 
-                final List<ClientFriend> empty = api.listFriends();
+                final List<ClientFriend> empty = realFriends(api.listFriends());
                 assertEquals(0, empty.size());
                 return null;
             }
         });
+    }
+    
+    private static List<ClientFriend> realFriends(ClientFriend[] friends) {
+        List<ClientFriend> realFriends = new ArrayList<ClientFriend>();
+        for (ClientFriend friend : friends) {
+            if (!friend.isFreeToFriend()) {
+                realFriends.add(friend);
+            }
+        }
+        return realFriends;
     }
 }

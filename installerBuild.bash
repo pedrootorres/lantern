@@ -42,9 +42,9 @@ git pull || die "Could not git pull?"
 if [[ $VERSION == "HEAD" ]]; 
 then 
     CHECKOUT=HEAD; 
-elif [[ $VERSION == "latest" ]];
+elif [[ $VERSION == "newest" ]];
 then
-    CHECKOUT=latest;
+    CHECKOUT=newest;
 else 
     CHECKOUT=lantern-$VERSION; 
 fi
@@ -53,7 +53,7 @@ oldbranch=`git rev-parse --abbrev-ref HEAD`
 
 git checkout $CHECKOUT || die "Could not checkout branch at $CHECKOUT"
 
-if [[ $VERSION == "latest" ]];
+if [[ $VERSION == "newest" ]];
 then
     # Exporting it so platform-specific scripts will get the right name.
     export VERSION=$(./parseversionfrompom.py);
@@ -83,11 +83,12 @@ git checkout -- $CONSTANTS_FILE || die "Could not revert version file?"
 
 if [[ $VERSION == "HEAD" ]];
 then
-    cp target/lantern-*.jar install/common/lantern.jar || die "Could not copy jar?"
+    cp -f target/lantern-*-small.jar install/common/lantern.jar || die "Could not copy jar?"
 else
-    cp target/lantern-$VERSION.jar install/common/lantern.jar || die "Could not copy jar?"
+    cp -f target/lantern-$VERSION-small.jar install/common/lantern.jar || die "Could not copy jar?"
 fi
 
+cp -f GeoIP.dat install/common/ || die "Could not copy GeoIP.dat?"
 
 ./bin/searchForJava7ClassFiles.bash install/common/lantern.jar || die "Found java 7 class files in build!!"
 

@@ -2,6 +2,7 @@ package org.lantern;
 
 import static org.littleshoot.util.FiveTuple.Protocol.*;
 
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.Date;
@@ -10,18 +11,19 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.net.ssl.SSLEngine;
 
+import org.lantern.proxy.BaseChainedProxy;
 import org.lantern.state.Peer;
 import org.lantern.state.Peer.Type;
-import org.littleshoot.proxy.ChainedProxy;
 import org.littleshoot.proxy.TransportProtocol;
 import org.littleshoot.util.FiveTuple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class ProxyHolder implements Comparable<ProxyHolder>,
-        ChainedProxy {
+public final class ProxyHolder extends BaseChainedProxy
+        implements Comparable<ProxyHolder> {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProxyHolder.class);
+    
     private final ProxyTracker proxyTracker;
 
     private final PeerFactory peerFactory;
@@ -31,6 +33,8 @@ public final class ProxyHolder implements Comparable<ProxyHolder>,
     private final URI jid;
 
     private final FiveTuple fiveTuple;
+    
+    private final boolean natTraversed;
 
     // Note - we initialize this to 1 to indicate that the proxy starts out
     // not connected (until we verify it)
@@ -45,13 +49,16 @@ public final class ProxyHolder implements Comparable<ProxyHolder>,
             final PeerFactory peerFactory,
             final LanternTrustStore lanternTrustStore,
             final URI jid, final FiveTuple tuple,
-            final Type type) {
+            final Type type, final boolean natTraversed,
+            final String lanternAuthToken) {
+        super(lanternAuthToken);
         this.proxyTracker = proxyTracker;
         this.peerFactory = peerFactory;
         this.lanternTrustStore = lanternTrustStore;
         this.jid = jid;
         this.fiveTuple = tuple;
         this.type = type;
+        this.natTraversed = natTraversed;
     }
 
     public FiveTuple getFiveTuple() {
@@ -191,7 +198,7 @@ public final class ProxyHolder implements Comparable<ProxyHolder>,
      * @return
      */
     public boolean isNatTraversed() {
-        return fiveTuple.getProtocol() == UDP;
+        return natTraversed;
     }
 
     /***************************************************************************
@@ -208,14 +215,14 @@ public final class ProxyHolder implements Comparable<ProxyHolder>,
     }
 
     /**
-     * If the protocol is UDP, we use the local address of the {@link FiveTuple}
+     * If the we are nat traversed, we use the local address of the {@link FiveTuple}
      * as our local address from which to connect to the chained proxy,
      * otherwise we leave this null to let the connection proceed from whatever
      * available port.
      */
     @Override
     public InetSocketAddress getLocalAddress() {
-        return UDP == fiveTuple.getProtocol() ? fiveTuple.getLocal() : null;
+        return natTraversed ? fiveTuple.getLocal() : null;
     }
 
     /**
@@ -253,11 +260,15 @@ public final class ProxyHolder implements Comparable<ProxyHolder>,
 
     @Override
     public void connectionFailed(Throwable cause) {
-        // TODO: For some reason the stack trace we get here just includes
-        // the message -- we really need the full stack along with causes.
-        LOG.info("Could not connect to proxy at ip: "+
-                this.fiveTuple.getRemote(), cause);
-        proxyTracker.onCouldNotConnect(this);
+        String message = cause != null ? cause.getMessage() : null;
+        LOG.debug("Got connectionFailed from LittleProxy: {}", message);
+        if (cause instanceof ConnectException) {
+            LOG.info("Could not connect to proxy at ip: "+
+                    this.fiveTuple.getRemote(), cause);
+            proxyTracker.onCouldNotConnect(this);
+        } else {
+            LOG.debug("Ignoring non-ConnectException");
+        }
     }
 
     @Override

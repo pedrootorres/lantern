@@ -99,6 +99,7 @@ public class Diagnostics {
                     "Are you sure you want to close Lantern Diagnostic tests?", "Quit?", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                    log.info("Quitting Lantern from diagnostics pane");
                     System.exit(0);
                 }
             }
@@ -196,7 +197,7 @@ public class Diagnostics {
         LanternUtils.waitForServer(LanternConstants.LANTERN_LOCALHOST_HTTP_PORT);
 
         output("Connected to server....");
-        final Collection<String> censored = Arrays.asList(//"exceptional.io");
+        final Collection<String> censored = Arrays.asList(
             //"www.getlantern.org",
             //"github.com",
             "facebook.com",
@@ -227,6 +228,7 @@ public class Diagnostics {
         }
         if (!pt.hasProxy()) {
             output("Still no proxy!! Exiting");
+            log.info("Still no proxy, exiting from Diagnostics dialog");
             System.exit(0);
         }
         

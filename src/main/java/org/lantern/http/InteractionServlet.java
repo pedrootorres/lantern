@@ -25,13 +25,14 @@ import org.lantern.Censored;
 import org.lantern.ConnectivityChangedEvent;
 import org.lantern.JsonUtils;
 import org.lantern.LanternClientConstants;
-import org.lantern.LanternFeedback;
+import org.lantern.LogglyHelper;
 import org.lantern.LanternUtils;
 import org.lantern.MessageKey;
 import org.lantern.Messages;
 import org.lantern.SecurityUtils;
 import org.lantern.event.Events;
 import org.lantern.event.ResetEvent;
+import org.lantern.oauth.RefreshToken;
 import org.lantern.state.Connectivity;
 import org.lantern.state.FriendsHandler;
 import org.lantern.state.InternalState;
@@ -111,28 +112,32 @@ public class InteractionServlet extends HttpServlet {
 
     private final Censored censored;
 
-    private final LanternFeedback lanternFeedback;
+    private final LogglyHelper logglyHelper;
 
     private final FriendsHandler friender;
 
     private final Messages msgs;
+
+    private RefreshToken refreshToken;
 
     @Inject
     public InteractionServlet(final Model model,
         final ModelService modelService,
         final InternalState internalState,
         final ModelIo modelIo, 
-        final Censored censored, final LanternFeedback lanternFeedback,
+        final Censored censored, final LogglyHelper logglyHelper,
         final FriendsHandler friender,
-        final Messages msgs) {
+        final Messages msgs,
+        final RefreshToken refreshToken) {
         this.model = model;
         this.modelService = modelService;
         this.internalState = internalState;
         this.modelIo = modelIo;
         this.censored = censored;
-        this.lanternFeedback = lanternFeedback;
+        this.logglyHelper = logglyHelper;
         this.friender = friender;
         this.msgs = msgs;
+        this.refreshToken = refreshToken;
         Events.register(this);
     }
 
@@ -252,7 +257,7 @@ public class InteractionServlet extends HttpServlet {
         log.debug("processRequest: modal = {}, inter = {}, mode = {}", 
             modal, inter, this.model.getSettings().getMode());
         
-        if (handleExceptionalInteractions(modal, inter, json)) {
+        if (handleExceptionInteractions(modal, inter, json)) {
             return; 
         }
 
@@ -352,9 +357,7 @@ public class InteractionServlet extends HttpServlet {
             case RETRY:
                 log.debug("Switching to authorize modal");
                 // We need to kill all the existing oauth tokens.
-                this.model.getSettings().setRefreshToken("");
-                this.model.getSettings().setAccessToken("");
-                this.model.getSettings().setExpiryTime(0L);
+                resetOauth();
                 Events.syncModal(model, Modal.authorize);
                 break;
             // not currently implemented:
@@ -479,16 +482,19 @@ public class InteractionServlet extends HttpServlet {
         case settingsLoadFailure:
             switch (inter) {
             case RETRY:
+                maybeSubmitToLoggly(json);
                 if (!modelIo.reload()) {
                     this.msgs.error(MessageKey.LOAD_SETTINGS_ERROR);
                 }
                 Events.syncModal(model, model.getModal());
                 break;
             case RESET:
+                maybeSubmitToLoggly(json);
                 backupSettings();
                 Events.syncModal(model, Modal.welcome);
                 break;
             default:
+                maybeSubmitToLoggly(json);
                 log.error("Did not handle interaction {} for modal {}", inter, modal);
                 break;
             }
@@ -555,19 +561,13 @@ public class InteractionServlet extends HttpServlet {
         case contact:
             switch(inter) {
             case CONTINUE:
-                String msg;
-                try {
-                    lanternFeedback.submit(json,
-                        this.model.getProfile().getEmail());
-                    this.msgs.info(MessageKey.CONTACT_THANK_YOU);
-                } catch (Exception e) {
-                    this.msgs.error(MessageKey.CONTACT_ERROR, e);
-                }
+                maybeSubmitToLoggly(json, true);
             // fall through because this should be done in both cases:
             case CANCEL:
                 Events.syncModal(model, this.internalState.getLastModal());
                 break;
             default:
+                maybeSubmitToLoggly(json, true);
                 HttpUtils.sendClientError(resp, "invalid interaction "+inter);
 
             }
@@ -588,6 +588,14 @@ public class InteractionServlet extends HttpServlet {
         this.modelIo.write();
     }
     
+    private void resetOauth() {
+        log.debug("Resetting oauth...");
+        this.refreshToken.reset();
+        this.model.getSettings().setRefreshToken("");
+        this.model.getSettings().setAccessToken("");
+        this.model.getSettings().setExpiryTime(0L);
+    }
+    
     private String email(final String json) {
         return JsonUtils.getValueFromJson("email", json).toLowerCase();
     }
@@ -601,13 +609,12 @@ public class InteractionServlet extends HttpServlet {
         }
     }
 
-    private boolean handleExceptionalInteractions(
+    private boolean handleExceptionInteractions(
             final Modal modal, final Interaction inter, final String json) {
         boolean handled = false;
-        Map<String, Object> map;
-        Boolean notify;
         switch(inter) {
             case EXCEPTION:
+                maybeSubmitToLoggly(json);
                 handleException(json);
                 handled = true;
                 break;
@@ -618,26 +625,42 @@ public class InteractionServlet extends HttpServlet {
                 Events.syncModel(this.model);
             // fall through because this should be done in both cases:
             case UNEXPECTEDSTATEREFRESH:
-                try {
-                    map = jsonToMap(json);
-                } catch(Exception e) {
-                    log.error("Bad json payload in inter '{}': {}", inter, json);
-                    return true;
-                }
-                notify = (Boolean)map.get("notify");
-                if(notify) {
-                    try {
-                        lanternFeedback.submit((String)map.get("report"),
-                            this.model.getProfile().getEmail());
-                    } catch(Exception e) {
-                        log.error("Could not submit unexpected state report: {}\n {}",
-                            e.getMessage(), (String)map.get("report"));
-                    }
-                }
+                log.debug("Handling unexpected state refresh.");
+                maybeSubmitToLoggly(json);
                 handled = true;
                 break;
         }
         return handled;
+    }
+
+    /**
+     * Used to submit user feedback from contact form as well as bug reports
+     * during e.g. settingsLoadFailure or unexpectedState describing what
+     * happened
+     * 
+     * @param json JSON with user's message + contextual information. If blank
+     * (can happen when user chooses not to notify developers) we do nothing.
+     * @param showNotification whether to show a success or failure notification
+     * upon submit
+     */
+    private void maybeSubmitToLoggly(String json, boolean showNotification) {
+        if (StringUtils.isBlank(json)) return;
+        try {
+            logglyHelper.submit(json);
+            if (showNotification) {
+                this.msgs.info(MessageKey.CONTACT_THANK_YOU);
+            }
+        } catch(Exception e) {
+            if (showNotification) {
+                this.msgs.error(MessageKey.CONTACT_ERROR, e);
+            }
+            log.error("Could not submit: {}\n {}",
+                e.getMessage(), json);
+        }
+    }
+
+    private void maybeSubmitToLoggly(String json) {
+        maybeSubmitToLoggly(json, false);
     }
 
     private void handleException(final String json) {
@@ -713,6 +736,7 @@ public class InteractionServlet extends HttpServlet {
                 log.warn("Could not delete model file?");
             }
         }
+        resetOauth();
         final Model base = new Model(model.getCountryService());
         model.setEverGetMode(false);
         model.setLaunchd(base.isLaunchd());
@@ -766,8 +790,6 @@ public class InteractionServlet extends HttpServlet {
         if (set.getMode() == null || set.getMode() == Mode.unknown) {
             if (censored.isCensored()) {
                 set.setMode(Mode.get);
-            } else {
-                set.setMode(Mode.give);
             }
         } else if (set.getMode() == Mode.give && censored.isCensored()) {
             // want to set the mode to get now so that we don't mistakenly

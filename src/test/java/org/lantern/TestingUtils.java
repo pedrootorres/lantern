@@ -17,6 +17,7 @@ import java.util.Queue;
 import java.util.concurrent.Callable;
 
 import javax.net.ssl.SSLEngine;
+import javax.security.auth.login.CredentialException;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -111,7 +112,7 @@ public class TestingUtils {
         return new CountryService(censored);
     }
 
-    public static XmppHandler newXmppHandler() throws IOException {
+    public static XmppHandler newXmppHandler() throws IOException, CredentialException {
         final Censored censored = new DefaultCensored();
         final Model mod = new Model(new CountryService(censored));
         final Settings set = mod.getSettings();
@@ -146,7 +147,7 @@ public class TestingUtils {
         
         final HttpClientFactory httpClientFactory = TestingUtils.newHttClientFactory();
         final OauthUtils oauth = new OauthUtils(httpClientFactory, model, new RefreshToken(model));
-        final FriendApi api = new FriendApi(oauth);
+        final FriendApi api = new FriendApi(oauth, model);
         
         final NetworkTracker<String, URI, ReceivedKScopeAd> networkTracker = new NetworkTracker<String, URI, ReceivedKScopeAd>();
         final FriendsHandler friendsHandler = 
@@ -158,7 +159,7 @@ public class TestingUtils {
         final PeerFactory peerFactory = 
             new DefaultPeerFactory(geoIpLookupService, model, roster);
         final ProxyTracker proxyTracker = 
-            new DefaultProxyTracker(model, peerFactory, null, trustStore);
+            new DefaultProxyTracker(model, peerFactory, trustStore);
         final KscopeAdHandler kscopeAdHandler = 
             new DefaultKscopeAdHandler(proxyTracker, trustStore, routingTable, 
                 null, networkTracker);
@@ -193,7 +194,7 @@ public class TestingUtils {
             updateTimer, stats, ksm, socketsUtil, xmppUtil, modelUtils,
             roster, proxyTracker, kscopeAdHandler, natPmpService, upnpService,
             new UdtServerFiveTupleListener(null, model),
-            friendsHandler, networkTracker, new Messages(model), censored);
+            friendsHandler, networkTracker, censored);
         return xmppHandler;
     }
 
@@ -223,11 +224,6 @@ public class TestingUtils {
 
 
     public static HttpClientFactory newHttClientFactory() {
-        final LanternKeyStoreManager ksm = TestingUtils.newKeyStoreManager();
-        final LanternTrustStore trustStore = new LanternTrustStore(ksm);
-        final LanternSocketsUtil socketsUtil =
-            new LanternSocketsUtil(null, trustStore);
-        
         final Censored censored = new DefaultCensored();
         final HttpClientFactory factory = 
                 new HttpClientFactory(censored);
@@ -249,7 +245,7 @@ public class TestingUtils {
         return ksm;
     }
 
-    public static String accessToken() throws IOException {
+    public static String accessToken() throws IOException, CredentialException {
         final DefaultHttpClient httpClient = new DefaultHttpClient();
         final OauthUtils utils = newOauthUtils();
         return utils.oauthTokens(httpClient, getRefreshToken()).getAccessToken();
@@ -281,7 +277,7 @@ public class TestingUtils {
      * @param work
      * @return
      */
-    public static <T> T doWithWithGetModeProxy(Callable<T> work) throws Exception {
+    public static <T> T doWithGetModeProxy(Callable<T> work) throws Exception {
         Censored censored = new DefaultCensored();
         CountryService countryService = new CountryService(censored);
         Model model = new Model(countryService);
