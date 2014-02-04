@@ -5,6 +5,7 @@ import static org.lantern.Tr.*;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
+import java.awt.MenuShortcut;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
@@ -16,6 +17,8 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
+import net.sourceforge.htmlunit.corejs.javascript.ast.KeywordLiteral;
+
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.lantern.event.Events;
@@ -25,6 +28,7 @@ import org.lantern.event.QuitEvent;
 import org.lantern.event.UpdateEvent;
 import org.lantern.state.Mode;
 import org.lantern.state.Model;
+import org.lantern.proxy.GiveModeProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -149,6 +153,35 @@ public class SystemTrayImpl implements org.lantern.SystemTray {
             });
             menu.add(dashboardItem);
 
+            menu.addSeparator();
+            
+            //adding 'lantern friends' item
+            final MenuItem lanternFriendsItem = new MenuItem("Lantern Friends");
+            menu.add(lanternFriendsItem);
+            //finish adding
+            
+            //Item Proxied Sites, only in Get Mode
+            final MenuItem proxiedSitesItem = new MenuItem("Proxied Sites");
+            menu.add(proxiedSitesItem);
+            //
+            
+            //Settings Item
+            final MenuItem settingsItem = new MenuItem("Settings");
+            menu.add(settingsItem);
+            //
+            
+            menu.addSeparator();
+            
+            //About Item
+            final MenuItem aboutItem = new MenuItem("About");
+            menu.add(aboutItem);
+            //
+            
+            //Contact Item
+            final MenuItem contactItem = new MenuItem("Contact");
+            menu.add(contactItem);
+            //
+            
             menu.addSeparator();
 
             final MenuItem quitItem = new MenuItem(tr("TRAY_QUIT"));
