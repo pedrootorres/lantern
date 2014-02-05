@@ -26,6 +26,7 @@ import org.lantern.event.GoogleTalkStateEvent;
 import org.lantern.event.ProxyConnectionEvent;
 import org.lantern.event.QuitEvent;
 import org.lantern.event.UpdateEvent;
+import org.lantern.state.Modal;
 import org.lantern.state.Mode;
 import org.lantern.state.Model;
 import org.lantern.proxy.GiveModeProxy;
@@ -157,16 +158,41 @@ public class SystemTrayImpl implements org.lantern.SystemTray {
             
             //adding 'lantern friends' item
             final MenuItem lanternFriendsItem = new MenuItem("Lantern Friends");
+            lanternFriendsItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					browserService.openBrowser();
+					Model model = new Model();
+//					model.setModal(Modal.proxiedSites);
+					Events.syncModal(model, Modal.lanternFriends);
+				}
+			});
             menu.add(lanternFriendsItem);
             //finish adding
             
             //Item Proxied Sites, only in Get Mode
             final MenuItem proxiedSitesItem = new MenuItem("Proxied Sites");
+            proxiedSitesItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					browserService.openBrowser();
+					Model model = new Model();
+					Events.syncModal(model, Modal.proxiedSites);
+				}
+			});
             menu.add(proxiedSitesItem);
             //
             
             //Settings Item
             final MenuItem settingsItem = new MenuItem("Settings");
+            settingsItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					browserService.openBrowser();
+					Model model = new Model();
+					Events.syncModal(model, Modal.settings);
+				}
+			});
             menu.add(settingsItem);
             //
             
@@ -174,11 +200,27 @@ public class SystemTrayImpl implements org.lantern.SystemTray {
             
             //About Item
             final MenuItem aboutItem = new MenuItem("About");
+            aboutItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					browserService.openBrowser();
+					Model model = new Model();
+					Events.syncModal(model, Modal.about);
+				}
+			});
             menu.add(aboutItem);
             //
             
             //Contact Item
             final MenuItem contactItem = new MenuItem("Contact");
+            contactItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					browserService.openBrowser();
+					Model model = new Model();
+					Events.syncModal(model, Modal.contact);
+				}
+			});
             menu.add(contactItem);
             //
             
